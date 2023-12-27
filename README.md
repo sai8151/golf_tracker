@@ -23,5 +23,5 @@ wget https://pjreddie.com/media/files/yolov3.weights
 python tracking.py
 ```
 
-reference
+# Output
 ![image](https://epidotic-masts.000webhostapp.com/imagex.png?raw=true)
