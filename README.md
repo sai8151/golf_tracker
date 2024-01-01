@@ -25,3 +25,14 @@ python tracking.py
 
 # Output
 ![image](https://epidotic-masts.000webhostapp.com/imagex.png?raw=true)
+
+
+
+# this worked for me
+```
+sudo pip3 uninstall numpy
+sudo pip uninstall numpy
+sudo pip uninstall opencv
+sudo pip3 install opencv-contrib-python
+sudo pip3 install numpy
+```
