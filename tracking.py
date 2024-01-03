@@ -91,7 +91,7 @@ hasFrame, frame = cap.read()
 # Mode string
 mode = "Detecting"
 state = "Tracking not started"
-
+path = []
 # Detected bounding box
 ballBoundingBox = None
 prev_center = None
@@ -149,6 +149,19 @@ while hasFrame:
             p1 = (int(ballBoundingBox[0]), int(ballBoundingBox[1]))
             p2 = (int(ballBoundingBox[0] + ballBoundingBox[2]),
                   int(ballBoundingBox[1] + ballBoundingBox[3]))
+            # Calculate the center point of the new bounding box
+            center_x = int(ballBoundingBox[0] + ballBoundingBox[2] / 2)
+            center_y = int(ballBoundingBox[1] + ballBoundingBox[3] / 2)
+
+            # Add the new point to the path
+            path.append((center_x, center_y))
+
+            # Draw the path
+            if len(path) > 1:
+                # Convert the path list to a numpy array
+                path_array = np.array(path, dtype=np.int32)
+                cv2.polylines(frame, [path_array], False, (0, 0, 255), 2)
+
             cv2.rectangle(frame, p1, p2, (0, 255, 0), 3)
             # Calculate speed if there is a previous frame to compare with
             if prev_center is not None and prev_time is not None:
@@ -180,6 +193,7 @@ while hasFrame:
                 # Display speed information
                 cv2.putText(frame, f"Speed: {speed:.2f} pixels/second", (0, 55),
                             cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255))
+              # Add the new point to the path
 
             # Update variables for the next iteration
             prev_center = center
